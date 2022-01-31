@@ -8,9 +8,7 @@ static t_list	*add_nbr_to_stack(t_list **first_element, char* nbr, int index)
 
 	number = ft_atoi(nbr);
 	if (index == 1)
-	{
 		(*first_element)->content = (void *)&number;
-	}
 	else
 	{
 		new = ft_calloc(1, sizeof(t_list));
@@ -53,20 +51,31 @@ static t_list	*create_stack(char **argv)
 	int		j;
 	int		index;
 	char	*nbr;
+	int		new_nbr;
+	int		start;
 
 	index = 0;
 	i = 1;
 	j = 0;
+	new_nbr = 0;
 	stack_a = ft_calloc(1, sizeof(t_list));
 	while (argv[i])
 	{
 		while (argv[i][j])
 		{
+			if (new_nbr == FALSE && ft_isdigit(argv[i][j]))
+			{
+				new_nbr = TRUE;
+				start = j;
+			}
+			else
+				new_nbr = FALSE;
 			if ((ft_isdigit(argv[i][j]) && ft_isspace(argv[i][j + 1]))
 				|| (ft_isdigit(argv[i][j]) && !argv[i][j + 1]))
 			{
 				index++;
-				nbr = ft_strndup(argv[i], j);
+				nbr = ft_substr(argv[i], start, (j - start + 1));
+				printf("%s\n", nbr);
 				stack_a = add_nbr_to_stack(&stack_a, nbr, index);
 				free(nbr);
 			}
@@ -88,8 +97,8 @@ void	parse_list(int argc, char **argv)
 	if (argc < 2 || count_args(argv) < 1)
 		exit(EXIT_FAILURE);
 	stack_a = create_stack(argv);
-	printf("%d\n", count_args(argv));
-	printf("%d\n", ft_lstsize(stack_a));
+	// printf("%d\n", count_args(argv));
+	// printf("%d\n", ft_lstsize(stack_a));
 }
 
 int	main(int argc, char **argv)

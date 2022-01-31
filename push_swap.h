@@ -6,6 +6,9 @@
 # include <stdlib.h>
 # include <limits.h>
 
+# define TRUE 1
+# define FALSE 0
+
 // int		check_args_int(int argc, char **argv);
 // int		check_doublons(int argc, char **argv);
 // t_list	*create_stack(int argc, char **argv);
