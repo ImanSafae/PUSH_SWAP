@@ -1,7 +1,26 @@
 #include "push_swap.h"
 #include <stdio.h>
 
-int	count_args(char **argv)
+static t_list	*add_nbr_to_stack(t_list **first_element, char* nbr, int index)
+{
+	t_list	*new;
+	int		number;
+
+	number = ft_atoi(nbr);
+	if (index == 1)
+	{
+		(*first_element)->content = (void *)&number;
+	}
+	else
+	{
+		new = ft_calloc(1, sizeof(t_list));
+		new->content = (void *)&number;
+		ft_lstadd_back(first_element, new);
+	}
+	return (*first_element);
+}
+
+static int	count_args(char **argv)
 {
 	int	i;
 	int	j;
@@ -16,9 +35,8 @@ int	count_args(char **argv)
 		{
 			if (!ft_isdigit(argv[i][j]) && !ft_isspace(argv[i][j]))
 				send_error();
-			if (ft_isdigit(argv[i][j]) && ft_isspace(argv[i][j + 1]))
-				count++;
-			else if (ft_isdigit(argv[i][j]) && !argv[i][j + 1])
+			if ((ft_isdigit(argv[i][j]) && ft_isspace(argv[i][j + 1]))
+				|| (ft_isdigit(argv[i][j]) && !argv[i][j + 1]))
 				count++;
 			j++;
 		}
@@ -28,14 +46,53 @@ int	count_args(char **argv)
 	return (count);
 }
 
-int	parse_list(int argc, char **argv)
+static t_list	*create_stack(char **argv)
 {
-	if (argc < 2 || count_args(argv) <= 1)
-		send_error();
+	t_list	*stack_a;
+	int		i;
+	int		j;
+	int		index;
+	char	*nbr;
+
+	index = 0;
+	i = 1;
+	j = 0;
+	stack_a = ft_calloc(1, sizeof(t_list));
+	while (argv[i])
+	{
+		while (argv[i][j])
+		{
+			if ((ft_isdigit(argv[i][j]) && ft_isspace(argv[i][j + 1]))
+				|| (ft_isdigit(argv[i][j]) && !argv[i][j + 1]))
+			{
+				index++;
+				nbr = ft_strndup(argv[i], j);
+				stack_a = add_nbr_to_stack(&stack_a, nbr, index);
+				free(nbr);
+			}
+			j++;
+		}
+		i++;
+		j = 0;
+	}
+	return (stack_a);
+}
+
+void	parse_list(int argc, char **argv)
+{
 	
+	t_list	*stack_a;
+	// t_list	*stack_b;
+
+	// vérifier que des arguments sont bien envoyés et qu'il y a au moins un chiffre
+	if (argc < 2 || count_args(argv) < 1)
+		exit(EXIT_FAILURE);
+	stack_a = create_stack(argv);
+	printf("%d\n", count_args(argv));
+	printf("%d\n", ft_lstsize(stack_a));
 }
 
 int	main(int argc, char **argv)
 {
-	printf("%d\n", parse_list(argc, argv));
+	parse_list(argc, argv);
 }

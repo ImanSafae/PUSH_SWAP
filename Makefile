@@ -13,6 +13,7 @@ all:	${NAME}
 
 ${NAME}:${OBJS}
 	${MAKE} -C ./LIBFT
+	${BONUS} -C ./LIBFT
 	cp ./LIBFT/libft.a ${NAME}
 	gcc ${FLAGS} -o ${NAME} ${OBJS} LIBFT/libft.a
 

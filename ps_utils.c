@@ -1,5 +1,21 @@
 #include "push_swap.h"
 
+char	*ft_strndup(char *str, int n)
+{
+	int		i;
+	char	*res;
+
+	i = 0;
+	res = malloc(sizeof(char) * (n + 2));
+	while (i <= n)
+	{
+		res[i] = str[i];
+		i++;
+	}
+	res[i] = '\0';
+	return (res);
+}
+
 void	send_error(void)
 {
 	ft_putstr_fd("Error\n", 2);

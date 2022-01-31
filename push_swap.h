@@ -11,7 +11,8 @@
 // t_list	*create_stack(int argc, char **argv);
 int			ft_isspace(char c);
 int			ft_isdigit(int c);
-int			parse_list(int argc, char **argv);
+char		*ft_strndup(char *str, int n);
+void		parse_list(int argc, char **argv);
 void		send_error(void);
 
 #endif
