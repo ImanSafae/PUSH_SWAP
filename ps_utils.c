@@ -1,5 +1,13 @@
 #include "push_swap.h"
 
+int	issymbol(char c)
+{
+	if (c == '+' || c == '-')
+		return (1);
+	else
+		return (0);
+}
+
 char	*ft_strndup(char *str, int n)
 {
 	int		i;
@@ -37,4 +45,17 @@ int	ft_isdigit(int c)
 		return (1);
 	else
 		return (0);
+}
+
+void	free_tab(char ***tab)
+{
+	int	i;
+
+	i = 0;
+	while ((*tab)[i])
+	{
+		free((*tab)[i]);
+		i++;
+	}
+	free(*tab);
 }
