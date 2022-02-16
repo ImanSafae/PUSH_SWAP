@@ -1,10 +1,10 @@
-FILES = newparsing.c ps_utils.c 
+FILES = newparsing.c ps_utils.c sort_only3.c sort_top3.c operations.c test.c
 
 OBJS = ${FILES:.c=.o}
 
 NAME = push_swap
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 %.o:	%.c
 	gcc -c ${FLAGS} -o $@ $<  

@@ -59,3 +59,14 @@ void	free_tab(char ***tab)
 	}
 	free(*tab);
 }
+
+int	is_sorted(t_list *stack)
+{
+	while (stack->next)
+	{
+		if (stack->next->content < stack->content)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
