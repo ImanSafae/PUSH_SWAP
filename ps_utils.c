@@ -70,3 +70,24 @@ int	is_sorted(t_list *stack)
 	}
 	return (1);
 }
+
+int	*sort_tab(int *tab, int limit)
+{
+	int	i;
+	int	tmp;
+
+	i = 0;
+	tmp = 0;
+	while (i + 1 < limit)
+	{
+		if (tab[i] > tab[i + 1])
+		{
+			tmp = tab[i];
+			tab[i] = tab[i + 1];
+			tab[i + 1] = tmp;
+			i = 0;
+		}
+		i++;
+	}
+	return (tab);
+}
