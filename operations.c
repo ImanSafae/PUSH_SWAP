@@ -8,6 +8,7 @@ void	sa(t_list **stack_a)
 	(*stack_a)->content = (*stack_a)->next->content;
 	(*stack_a)->next->content = tmp;
 	ft_putstr_fd("sa\n", 1);
+	// ft_lstadd_back(ops, ft_lstnew(SA));
 }
 
 void	sb(t_list **stack_b)
@@ -18,6 +19,7 @@ void	sb(t_list **stack_b)
 	(*stack_b)->content = (*stack_b)->next->content;
 	(*stack_b)->next->content = tmp;
 	ft_putstr_fd("sb\n", 1);
+	// ft_lstadd_back(ops, ft_lstnew(SB));
 }
 
 void	ss(t_list **stack_a, t_list **stack_b)
@@ -42,6 +44,7 @@ void	pa(t_list **stack_a, t_list **stack_b)
 	*stack_b = (*stack_b)->next;
 	ft_lstadd_front(stack_a, tmp);
 	ft_putstr_fd("pa\n", 1);
+	// ft_lstadd_back(ops, ft_lstnew(PA));
 }
 
 void	pb(t_list **stack_a, t_list **stack_b)
@@ -52,6 +55,7 @@ void	pb(t_list **stack_a, t_list **stack_b)
 	*stack_a = (*stack_a)->next;
 	ft_lstadd_front(stack_b, tmp);
 	ft_putstr_fd("pb\n", 1);
+	// ft_lstadd_back(ops, ft_lstnew(PB));
 }
 
 void	ra(t_list **stack_a)
@@ -63,19 +67,7 @@ void	ra(t_list **stack_a)
 	ft_lstadd_back(stack_a, tmp);
 	tmp->next = NULL;
 	ft_putstr_fd("ra\n", 1);
-
-	/* méthode alternative ?
-	int		first;
-	t_list	*tmp;
-
-	first = (*stack_a)->content;
-	tmp = *stack_a;
-	while (tmp->next)
-	{
-		tmp->content = tmp->next->content;
-		tmp = tmp->next;
-	}
-	tmp->content = &first; */
+	// ft_lstadd_back(ops, ft_lstnew(RA));
 }
 
 void	rb(t_list **stack_b)
@@ -87,6 +79,7 @@ void	rb(t_list **stack_b)
 	ft_lstadd_back(stack_b, tmp);
 	tmp->next = NULL;
 	ft_putstr_fd("rb\n", 1);
+	// ft_lstadd_back(ops, ft_lstnew(RB));
 }
 
 void	rr(t_list **stack_a, t_list **stack_b)
@@ -107,24 +100,6 @@ void	rr(t_list **stack_a, t_list **stack_b)
 
 void	rra(t_list **stack_a)
 {
-	// int		*tmp1;
-	// int		*tmp2;
-	// t_list	*tmp;
-
-	// tmp = *stack_a;
-	// tmp1 = tmp->content;
-	// tmp->content = (ft_lstlast(*stack_a))->content;
-	// tmp = tmp->next;
-	// while (tmp->next)
-	// {
-	// 	tmp2 = tmp->next->content;
-	// 	tmp->content = tmp1;
-	// 	tmp1 = tmp2;
-	// 	tmp = tmp->next;
-	// }
-	// ft_putstr_fd("rra\n", 1);
-
-	/* méthode alternative*/ 
 	t_list	*tmp;
 	t_list	*tmp2;
 
@@ -181,3 +156,27 @@ void	rrr(t_list **stack_a, t_list **stack_b)
 	ft_lstadd_front(stack_b, tmp);
 	ft_putstr_fd("rrr\n", 1);
 }
+
+// void	print_operations(t_list *ops)
+// {
+// 	while (ops->next)
+// 	{
+// 		if (ops->content == SA)
+// 			ft_putstr_fd("sa\n", 1);
+// 		else if (ops->content == SB)
+// 			ft_putstr_fd("sb\n", 1);
+// 		else if (ops->content == PA)
+// 			ft_putstr_fd("pa\n", 1);
+// 		else if (ops->content == PB)
+// 			ft_putstr_fd("pb\n", 1);
+// 		else if (ops->content == RA)
+// 			ft_putstr_fd("ra\n", 1);
+// 		else if (ops->content == RB)
+// 			ft_putstr_fd("ra\n", 1);
+// 		else if (ops->content == RRA)
+// 			ft_putstr_fd("rra\n", 1);
+// 		else if (ops->content == RRB)
+// 			ft_putstr_fd("rrb\n", 1);
+// 		ops = ops->next;
+// 	}
+// }

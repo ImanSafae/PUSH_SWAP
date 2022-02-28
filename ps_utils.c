@@ -71,7 +71,7 @@ int	is_sorted(t_list *stack)
 	return (1);
 }
 
-int	*sort_tab(int *tab, int limit)
+void sort_tab(int **tab, int limit)
 {
 	int	i;
 	int	tmp;
@@ -80,14 +80,39 @@ int	*sort_tab(int *tab, int limit)
 	tmp = 0;
 	while (i + 1 < limit)
 	{
-		if (tab[i] > tab[i + 1])
+		if ((*tab)[i] > (*tab)[i + 1])
 		{
-			tmp = tab[i];
-			tab[i] = tab[i + 1];
-			tab[i + 1] = tmp;
+			tmp = (*tab)[i];
+			(*tab)[i] = (*tab)[i + 1];
+			(*tab)[i + 1] = tmp;
 			i = 0;
 		}
-		i++;
+		else
+			i++;
 	}
+}
+
+int *put_list_in_tab(t_list *stack, int size)
+{
+	int *tab;
+	int i;
+
+	tab = malloc(sizeof(int) * (size + 1));
+	i = 0;
+	while (i < size)
+	{
+		tab[i] = stack->content;
+		i++;
+		stack = stack->next;
+	}
+	return (tab);
+}
+
+int	*list_to_sorted_tab(t_list *stack, int size)
+{
+	int	*tab;
+
+	tab = put_list_in_tab(stack, size);
+	sort_tab(&tab, size);
 	return (tab);
 }

@@ -9,7 +9,7 @@ OBJS_BONUS = ${FCTS_BONUS:.c=.o}
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 %.o:	%.c
 	gcc -c ${FLAGS} -o $@ $<  

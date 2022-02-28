@@ -98,30 +98,3 @@ t_list	*parse_list(int argc, char **argv)
 	check_doublons(stack_a);
 	return (stack_a);
 }
-
-int	main(void)
-{
-	// t_list	*a;
-	// t_list	*b = 0;
-
-	// a = parse_list(argc, argv);
-	// // printf("%d\n", is_sorted(a));
-	// sort_top_three(&a);
-	// ft_print(a, b);
-	int	*tab;
-	int limit = 6;
-	tab = malloc(sizeof(int) * limit);
-	int i = 0;
-	tab[0] = 2;
-	tab[1] = 1;
-	tab[2] = 3;
-	tab[3] = 5;
-	tab[4] = 6;
-	tab[5] = 4;
-	tab = sort_tab(tab, limit);
-	while (i < limit)
-	{
-		printf("tab[%d] = %d\n", i, tab[i]);
-		i++;
-	}
-}
