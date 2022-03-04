@@ -10,6 +10,15 @@
 # define TRUE 1
 # define FALSE 0
 
+# define SA 1
+# define SB 2
+# define RA 3
+# define RB 4
+# define RRA 5
+# define RRB 6
+# define PA 7
+# define PB 8
+
 typedef struct s_info
 {
 	int	stack_size;
@@ -18,6 +27,12 @@ typedef struct s_info
 	// int	second_tridian;
 	int	*tab;
 }			t_info;
+
+// typedef struct s_ops
+// {
+// 	char 			*op;
+// 	struct s_ops 	*next;
+// }					t_list;
 
 // int		check_args_int(int argc, char **argv);
 // int		check_doublons(int argc, char **argv);
@@ -34,27 +49,28 @@ void		send_error(void);
 int			is_sorted(t_list *stack);
 
 // OPERATIONS
-void	sa(t_list **stack_a);
-void	sb(t_list **stack_b);
-void	ra(t_list **stack_a);
-void	rb(t_list **stack_b);
-void	rra(t_list **stack_a);
-void	rrb(t_list **stack_b);
+void	sa(t_list **stack_a, t_list **ops);
+void	sb(t_list **stack_b, t_list **ops);
+void	ra(t_list **stack_a, t_list **ops);
+void	rb(t_list **stack_b, t_list **ops);
+void	rra(t_list **stack_a, t_list **ops);
+void	rrb(t_list **stack_b, t_list **ops);
 void	rrr(t_list **stack_a, t_list **stack_b);
 void	rr(t_list **stack_a, t_list **stack_b);
 void	ss(t_list **stack_a, t_list **stack_b);
-void	pa(t_list **stack_a, t_list **stack_b);
-void	pb(t_list **stack_a, t_list **stack_b);
-// void	print_operations(t_list *ops);
+void	pa(t_list **stack_a, t_list **stack_b, t_list **ops);
+void	pb(t_list **stack_a, t_list **stack_b, t_list **ops);
+void	print_operations(t_list *ops);
 
 // TEST
 void	ft_print(t_list *a, t_list *b, t_list *chunks);
 
 // SORT
-void	sort_two_or_three(t_list **stack);
-void	sort_top_three(t_list **stack);
+void	sort_two_or_three(t_list **stack, t_list **ops);
+void	sort_top_three(t_list **stack, t_list **ops);
 // void	divide_by_tridian(t_list **a, t_list **b, int size);
-void	divide_a_by_median(t_list **a, t_list **b, t_list **chunks, int size);
+void	divide_a_by_median(t_list **a, t_list **b, t_list **chunks, int size, t_list **ops);
+int		divide_b_by_median(t_list **b, t_list **a, t_list **chunks, t_list **ops);
 
 // UTILS
 void	sort_tab(int **tab, int limit);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_utils.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itaouil <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/01 12:40:35 by itaouil           #+#    #+#             */
+/*   Updated: 2022/03/01 12:40:36 by itaouil          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	issymbol(char c)
@@ -71,7 +83,7 @@ int	is_sorted(t_list *stack)
 	return (1);
 }
 
-void sort_tab(int **tab, int limit)
+void	sort_tab(int **tab, int limit)
 {
 	int	i;
 	int	tmp;
@@ -94,8 +106,8 @@ void sort_tab(int **tab, int limit)
 
 int *put_list_in_tab(t_list *stack, int size)
 {
-	int *tab;
-	int i;
+	int	*tab;
+	int	i;
 
 	tab = malloc(sizeof(int) * (size + 1));
 	i = 0;

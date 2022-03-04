@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_top3.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itaouil <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/01 12:40:57 by itaouil           #+#    #+#             */
+/*   Updated: 2022/03/01 12:40:59 by itaouil          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void	check_sa(t_list **stack)
+static void	check_sa(t_list **stack, t_list **ops)
 {
 	int	top;
 	int	middle;
@@ -12,10 +24,10 @@ static void	check_sa(t_list **stack)
 	if (is_sorted((*stack)))
 		return ;
 	if (top > middle)
-		sa(stack);
+		sa(stack, ops);
 }
 
-static void	check_ra(t_list **stack)
+static void	check_ra(t_list **stack, t_list **ops)
 {
 	int	top;
 	int	middle;
@@ -27,10 +39,10 @@ static void	check_ra(t_list **stack)
 	if (is_sorted((*stack)))
 		return ;
 	if (middle > top && middle > bottom)
-		ra(stack);
+		ra(stack, ops);
 }
 
-static void	check_rra(t_list **stack)
+static void	check_rra(t_list **stack, t_list **ops)
 {
 	int	top;
 	int	middle;
@@ -42,15 +54,15 @@ static void	check_rra(t_list **stack)
 	if (is_sorted((*stack)))
 		return ;
 	if (top < middle && middle < bottom)
-		rra(stack);
+		rra(stack, ops);
 }
 
-void	sort_top_three(t_list **stack)
+void	sort_top_three(t_list **stack, t_list **ops)
 {
 	while (!is_sorted(*stack))
 	{
-		check_ra(stack);
-		check_sa(stack);
-		check_rra(stack);
+		check_ra(stack, ops);
+		check_sa(stack, ops);
+		check_rra(stack, ops);
 	}
 }

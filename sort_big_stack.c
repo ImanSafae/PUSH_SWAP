@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_big_stack.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itaouil <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/01 12:40:42 by itaouil           #+#    #+#             */
+/*   Updated: 2022/03/01 12:40:44 by itaouil          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	update_chunks_list(t_list **chunks, int count)
@@ -24,7 +36,7 @@ void	init_stack_info(t_list *stack, t_info **info, int size)
 	(*info)->tab = list_to_sorted_tab(stack, size);
 }
 
-void	divide_a_by_median(t_list **a, t_list **b, t_list **chunks, int size)
+void	divide_a_by_median(t_list **a, t_list **b, t_list **chunks, int size, t_list **ops)
 {
 	t_info	*info;
 	int		i;
@@ -36,10 +48,10 @@ void	divide_a_by_median(t_list **a, t_list **b, t_list **chunks, int size)
 	while (i < info->stack_size)
 	{
 		if ((*a)->content > info->median)
-			ra(a);
+			ra(a, ops);
 		else
 		{
-			pb(a, b);
+			pb(a, b, ops);
 			count++;
 		}
 		i++;
@@ -48,7 +60,7 @@ void	divide_a_by_median(t_list **a, t_list **b, t_list **chunks, int size)
 	ft_lstadd_front(chunks, ft_lstnew(count));
 }
 
-int	divide_b_by_median(t_list **b, t_list **a, t_list **chunks)
+int	divide_b_by_median(t_list **b, t_list **a, t_list **chunks, t_list **ops)
 {
 	t_info	*info;
 	int		i;
@@ -57,14 +69,13 @@ int	divide_b_by_median(t_list **b, t_list **a, t_list **chunks)
 
 	init_stack_info((*b), &info, (*chunks)->content);
 	i = 0;
-	// printf("chunk size = %d\n", (*chunks)->content);
-	while  (i < info->stack_size)
+	while (i < info->stack_size)
 	{
 		if ((*b)->content > info->median)
-			pa(a, b);
+			pa(a, b, ops);
 		else
 		{
-			rb(b);
+			rb(b, ops);
 			count++;
 		}
 		i++;
@@ -72,7 +83,7 @@ int	divide_b_by_median(t_list **b, t_list **a, t_list **chunks)
 	i = 0;
 	while (i < count)
 	{
-		rrb(b);
+		rrb(b, ops);
 		i++;
 	}
 	free(info);
@@ -122,40 +133,3 @@ int	get_median(t_list *stack, int size)
 // 	rank = (size / 3) * index;
 // 	return (tab[rank - 1]);
 // }
-
-int	main(int argc, char **argv)
-{
-	t_list	*a;
-	t_list	*b = 0;
-	t_list	*chunks = 0;
-	int		count;
-	int		i;
-	
-	a = parse_list(argc, argv);
-	i = 0;
-	while (ft_lstsize(a) > 3)
-		divide_a_by_median(&a, &b, &chunks, ft_lstsize(a));
-	if (ft_lstsize(a) <= 3)
-		sort_two_or_three(&a);
-	while (chunks || !is_sorted(a))
-	{
-		if (chunks->content <= 3)
-		{
-			while (i < chunks->content)
-			{
-				pa(&a, &b);
-				i++;
-			}
-			i = 0;
-			chunks = chunks->next;
-		}
-		else
-		{
-			count = divide_b_by_median(&b, &a, &chunks);
-			if (count > 3)
-				divide_a_by_median(&a, &b, &chunks, count);
-		}
-		sort_top_three(&a);
-		// ft_print(a, b, chunks);
-	}
-}
