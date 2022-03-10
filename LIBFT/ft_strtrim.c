@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: itaouil <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/08 23:28:19 by itaouil           #+#    #+#             */
+/*   Updated: 2022/03/08 23:28:20 by itaouil          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 static int	char_in_set(char const c, char const *set)
@@ -16,8 +28,8 @@ static int	char_in_set(char const c, char const *set)
 
 char	*ft_strtrim(char const *s, char const *set)
 {
-	int	tab[2];
-	int	start;
+	int		tab[2];
+	int		start;
 	char	*res;
 
 	tab[0] = 0;

@@ -36,7 +36,7 @@ void	init_stack_info(t_list *stack, t_info **info, int size)
 	(*info)->tab = list_to_sorted_tab(stack, size);
 }
 
-void	divide_a_by_median(t_list **a, t_list **b, t_list **chunks, int size, t_list **ops)
+void	divide_a_by_median(t_list **a, t_list **b, t_moves **moves, int size)
 {
 	t_info	*info;
 	int		i;
@@ -48,30 +48,28 @@ void	divide_a_by_median(t_list **a, t_list **b, t_list **chunks, int size, t_lis
 	while (i < info->stack_size)
 	{
 		if ((*a)->content > info->median)
-			ra(a, ops);
+			ra(a, &(*moves)->ops);
 		else
 		{
-			pb(a, b, ops);
+			pb(a, b, &(*moves)->ops);
 			count++;
 		}
 		i++;
 	}
 	free(info);
-	ft_lstadd_front(chunks, ft_lstnew(count));
+	ft_lstadd_front(&(*moves)->chunks, ft_lstnew(count));
 }
 
-int	divide_b_by_median(t_list **b, t_list **a, t_list **chunks, t_list **ops)
+static int	divide_b(t_info **info, t_list **a, t_list **b, t_list **ops)
 {
-	t_info	*info;
-	int		i;
-	int		count = 0;
-	int		ret = (*chunks)->content;
+	int	i;
+	int	count;
 
-	init_stack_info((*b), &info, (*chunks)->content);
 	i = 0;
-	while (i < info->stack_size)
+	count = 0;
+	while (i < (*info)->stack_size)
 	{
-		if ((*b)->content > info->median)
+		if ((*b)->content > (*info)->median)
 			pa(a, b, ops);
 		else
 		{
@@ -86,6 +84,19 @@ int	divide_b_by_median(t_list **b, t_list **a, t_list **chunks, t_list **ops)
 		rrb(b, ops);
 		i++;
 	}
+	return (count);
+}
+
+int	divide_b_by_median(t_list **b, t_list **a, t_list **chunks, t_list **ops)
+{
+	t_info	*info;
+	int		count;
+	int		ret;
+
+	init_stack_info((*b), &info, (*chunks)->content);
+	count = 0;
+	ret = (*chunks)->content;
+	count = divide_b(&info, a, b, ops);
 	free(info);
 	update_chunks_list(chunks, count);
 	return (ret - count);
@@ -112,24 +123,4 @@ int	divide_b_by_median(t_list **b, t_list **a, t_list **chunks, t_list **ops)
 // 		}
 // 		i++;
 // 	}
-// }
-
-int	get_median(t_list *stack, int size)
-{
-	int	rank;
-	int	*tab;
-
-	tab = list_to_sorted_tab(stack, size);
-	rank = (size / 2);
-	return (tab[rank - 1]);
-}
-
-// int	get_tridian(t_list *stack, int index, int size)
-// {
-// 	int	rank;
-// 	int	*tab;
-
-// 	tab = list_to_sorted_tab(stack, size);
-// 	rank = (size / 3) * index;
-// 	return (tab[rank - 1]);
 // }

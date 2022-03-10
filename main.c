@@ -12,40 +12,66 @@
 
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+static void	init_struct(t_moves **moves)
 {
-	t_list	*a;
-	t_list	*b = 0;
-	t_list	*chunks = 0;
+	t_list	*chunks;
 	t_list	*ops;
-	int		count;
-	int		i;
 
-	a = parse_list(argc, argv);
+	chunks = 0;
+	ops = 0;
+	(*moves)->chunks = chunks;
+	(*moves)->ops = ops;
+}
+
+static void	first_moves(t_list **a, t_list **b, t_moves **moves)
+{
+	while (ft_lstsize((*a)) > 3)
+		divide_a_by_median(a, b, moves, ft_lstsize((*a)));
+	if (ft_lstsize((*a)) <= 3)
+		sort_two_or_three(a, &(*moves)->ops);
+}
+
+static void	move_until_sorted(t_list **a, t_list **b, t_moves **moves)
+{
+	int	i;
+	int	count;
+
 	i = 0;
-	while (ft_lstsize(a) > 3)
-		divide_a_by_median(&a, &b, &chunks, ft_lstsize(a), &ops);
-	if (ft_lstsize(a) <= 3)
-		sort_two_or_three(&a, &ops);
-	while (chunks || !is_sorted(a))
+	while ((*moves)->chunks || !is_sorted(*a))
 	{
-		if (chunks->content <= 3)
+		if ((*moves)->chunks->content <= 3)
 		{
-			while (i < chunks->content)
+			while (i < (*moves)->chunks->content)
 			{
-				pa(&a, &b, &ops);
+				pa(a, b, &((*moves)->ops));
 				i++;
 			}
 			i = 0;
-			chunks = chunks->next;
+			(*moves)->chunks = (*moves)->chunks->next;
 		}
 		else
 		{
-			count = divide_b_by_median(&b, &a, &chunks, &ops);
+			count = divide_b_by_median(b, a,
+					&((*moves)->chunks), &((*moves)->ops));
 			if (count > 3)
-				divide_a_by_median(&a, &b, &chunks, count, &ops);
+				divide_a_by_median(a, b, moves, count);
 		}
-		sort_top_three(&a, &ops);
+		sort_top_three(a, &((*moves)->ops));
 	}
-	print_operations(ops);
+}
+
+int	main(int argc, char **argv)
+{
+	t_list	*a;
+	t_list	*b;
+	t_moves	*moves;
+
+	a = parse_list(argc, argv);
+	b = 0;
+	moves = malloc(sizeof(t_moves));
+	init_struct(&moves);
+	first_moves(&a, &b, &moves);
+	move_until_sorted(&a, &b, &moves);
+	print_operations(moves->ops);
+	free(moves);
 }

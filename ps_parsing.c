@@ -33,10 +33,12 @@ static void	check_doublons(t_list *stack)
 
 static void	add_nbr_to_stack(t_list **stack, char *nbr, int index)
 {
-	int	number;
+	long	number;
 
 	(void)index;
 	number = ft_atoi(nbr);
+	if (number > INT_MAX || number < INT_MIN)
+		send_error();
 	if (index == 1)
 		(*stack)->content = number;
 	else
@@ -102,12 +104,9 @@ t_list	*parse_list(int argc, char **argv)
 {
 	t_list	*stack_a;
 
-	// vérifier que des arguments sont bien envoyés et qu'il y a au moins un chiffre
 	if (argc < 2 || count_args(argv) < 1)
 		exit(EXIT_FAILURE);
 	stack_a = create_stack(argv);
-	// printf("%d\n", count_args(argv));
-	// printf("%d\n", ft_lstsize(stack_a));
 	check_doublons(stack_a);
 	return (stack_a);
 }

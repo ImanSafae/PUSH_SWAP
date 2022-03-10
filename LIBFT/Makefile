@@ -17,7 +17,7 @@ FLAGS = -Wall -Wextra -Werror -g
 all:	${NAME}
 
 bonus:	${OBJS_BONUS} ${OBJS}
-	ar rc ${NAME} ${OBJS_BONUS}
+	ar rc ${NAME} ${OBJS} ${OBJS_BONUS}
 
 ${NAME}:${OBJS}
 	ar rc ${NAME} ${OBJS}

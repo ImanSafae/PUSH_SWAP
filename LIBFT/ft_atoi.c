@@ -12,6 +12,12 @@
 
 #include "libft.h"
 
+// static void	send_error(void)
+// {
+// 	ft_putstr_fd("Error\n", 2);
+// 	exit(EXIT_FAILURE);
+// }
+
 static int	ft_strcmp(const char *s1, const char *s2)
 {
 	int	i;
@@ -32,11 +38,11 @@ static int	int_max_or_min(const char *str)
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	i;
-	int	res;
-	int	sign;
+	int		i;
+	long	res;
+	int		sign;
 
 	i = 0;
 	res = 0;

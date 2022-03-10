@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itaouil <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/08 23:26:28 by itaouil           #+#    #+#             */
-/*   Updated: 2022/03/08 23:26:29 by itaouil          ###   ########.fr       */
+/*   Created: 2022/03/08 23:13:22 by itaouil           #+#    #+#             */
+/*   Updated: 2022/03/08 23:13:23 by itaouil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-void	ft_putchar_fd(char c, int fd)
+int	get_median(t_list *stack, int size)
 {
-	write(fd, &c, 1);
+	int	rank;
+	int	*tab;
+
+	tab = list_to_sorted_tab(stack, size);
+	rank = (size / 2);
+	return (tab[rank - 1]);
 }
+
+// int	get_tridian(t_list *stack, int index, int size)
+// {
+// 	int	rank;
+// 	int	*tab;
+
+// 	tab = list_to_sorted_tab(stack, size);
+// 	rank = (size / 3) * index;
+// 	return (tab[rank - 1]);
+// }

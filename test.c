@@ -15,23 +15,26 @@
 
 void	ft_print(t_list *a, t_list *b, t_list *chunks)
 {
-	t_list* tmp;
+	t_list	*tmp;
 
 	tmp = a;
 	printf("PILE A: ");
-	while (tmp) {
+	while (tmp)
+	{
 		printf("%d ", (tmp->content));
 		tmp = tmp->next;
 	}
 	printf("\nPILE B: ");
 	tmp = b;
-	while (tmp) {
+	while (tmp)
+	{
 		printf("%d ", (tmp->content));
 		tmp = tmp->next;
 	}
 	printf("\nCHUNKS: ");
 	tmp = chunks;
-	while (tmp) {
+	while (tmp)
+	{
 		printf("%d ", (tmp->content));
 		tmp = tmp->next;
 	}
