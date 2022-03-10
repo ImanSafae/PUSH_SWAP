@@ -61,6 +61,8 @@ static int	count_args(char **argv)
 			if (!ft_isdigit(argv[i][j]) && !ft_isspace(argv[i][j])
 				&& !issymbol(argv[i][j]))
 				send_error();
+			if (issymbol(argv[i][j]) && !ft_isdigit(argv[i][j + 1]))
+				send_error();
 			if ((ft_isdigit(argv[i][j]) && ft_isspace(argv[i][j + 1]))
 				|| (ft_isdigit(argv[i][j]) && !argv[i][j + 1]))
 				count++;

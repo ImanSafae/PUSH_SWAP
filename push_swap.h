@@ -35,8 +35,6 @@ typedef struct s_info
 {
 	int	stack_size;
 	int	median;
-	// int	tridian;
-	// int	second_tridian;
 	int	*tab;
 }			t_info;
 
@@ -50,7 +48,7 @@ typedef struct s_moves
 void	free_tab(char ***tab);
 int		ft_isspace(char c);
 int		ft_isdigit(int c);
-cha		*ft_strndup(char *str, int n);
+char	*ft_strndup(char *str, int n);
 int		issymbol(char c);
 t_list	*parse_list(int argc, char **argv);
 void	send_error(void);

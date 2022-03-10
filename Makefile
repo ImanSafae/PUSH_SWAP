@@ -1,4 +1,4 @@
-FILES = main.c math.c operations.c operations2.c ps_parsing.c ps_utils.c ps_utils2.c sort_only3.c sort_top3.c print_ops.c sort_big_stack.c test.c
+FILES = main.c math.c operations.c operations2.c ps_parsing.c ps_utils.c ps_utils2.c sort_only3.c sort_top3.c print_ops.c sort_big_stack.c
 
 OBJS = ${FILES:.c=.o}
 
