@@ -12,19 +12,6 @@
 
 #include "push_swap.h"
 
-void	free_tab(char ***tab)
-{
-	int	i;
-
-	i = 0;
-	while ((*tab)[i])
-	{
-		free((*tab)[i]);
-		i++;
-	}
-	free(*tab);
-}
-
 int	is_sorted(t_list *stack)
 {
 	while (stack->next)

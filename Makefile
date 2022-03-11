@@ -1,10 +1,10 @@
-FILES = main.c math.c operations.c operations2.c ps_parsing.c ps_utils.c ps_utils2.c sort_only3.c sort_top3.c print_ops.c sort_big_stack.c
+FILES = free.c main.c math.c operations.c operations2.c ps_parsing.c ps_utils.c ps_utils2.c sort_only3.c sort_top3.c print_ops.c sort_big_stack.c
 
 OBJS = ${FILES:.c=.o}
 
 NAME = push_swap
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -g
 
 %.o:	%.c
 	gcc -c ${FLAGS} -o $@ $<  

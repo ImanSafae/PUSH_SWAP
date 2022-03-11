@@ -31,7 +31,6 @@ void	init_stack_info(t_list *stack, t_info **info, int size)
 	(*info) = malloc(sizeof(t_info));
 	(*info)->stack_size = size;
 	(*info)->median = get_median(stack, size);
-	(*info)->tab = list_to_sorted_tab(stack, size);
 }
 
 void	divide_a_by_median(t_list **a, t_list **b, t_moves **moves, int size)

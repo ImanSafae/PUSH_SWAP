@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itaouil <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/18 11:10:04 by itaouil           #+#    #+#             */
-/*   Updated: 2022/03/08 23:25:03 by itaouil          ###   ########.fr       */
+/*   Created: 2022/03/11 18:26:06 by itaouil           #+#    #+#             */
+/*   Updated: 2022/03/11 18:26:07 by itaouil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "push_swap.h"
 
-t_list	*ft_lstmap(t_list *lst, int (*f)(int), void (*del)(void*))
+void	free_tab(char ***tab)
 {
-	t_list	*newlist;
-	t_list	*i;
-	t_list	*element;
+	int	i;
 
-	i = lst;
-	newlist = NULL;
-	while (i != NULL)
+	i = 0;
+	while ((*tab)[i])
 	{
-		element = ft_lstnew(f(i->content));
-		if (!element)
-		{
-			ft_lstclear(&newlist, del);
-			return (NULL);
-		}
-		ft_lstadd_back(&newlist, element);
-		i = i->next;
+		free((*tab)[i]);
+		i++;
 	}
-	return (newlist);
+	free(*tab);
+}
+
+void	erase_content(void *content)
+{
+	content = NULL;
+}
+
+void	free_stack(t_list **stack)
+{
+	ft_lstclear(stack, erase_content);
+	free((*stack));
 }
