@@ -16,8 +16,11 @@ int	get_median(t_list *stack, int size)
 {
 	int	rank;
 	int	*tab;
+	int	median;
 
 	tab = list_to_sorted_tab(stack, size);
 	rank = (size / 2);
-	return (tab[rank - 1]);
+	median = tab[rank - 1];
+	free(tab);
+	return (median);
 }

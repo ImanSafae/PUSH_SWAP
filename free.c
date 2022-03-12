@@ -12,6 +12,15 @@
 
 #include "push_swap.h"
 
+void	free_first_element(t_list **list)
+{
+	t_list	*tmp;
+
+	tmp = (*list);
+	(*list) = (*list)->next;
+	free(tmp);
+}
+
 void	free_tab(char ***tab)
 {
 	int	i;

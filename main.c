@@ -26,9 +26,7 @@ static void	init_struct(t_moves **moves)
 static void	first_moves(t_list **a, t_list **b, t_moves **moves)
 {
 	while (ft_lstsize((*a)) > 3)
-	{
 		divide_a_by_median(a, b, moves, ft_lstsize((*a)));
-	}
 	if (ft_lstsize((*a)) <= 3)
 		sort_two_or_three(a, &(*moves)->ops);
 }
@@ -49,7 +47,7 @@ static void	move_until_sorted(t_list **a, t_list **b, t_moves **moves)
 				i++;
 			}
 			i = 0;
-			(*moves)->chunks = (*moves)->chunks->next;
+			free_first_element(&(*moves)->chunks);
 		}
 		else
 		{
@@ -79,5 +77,6 @@ int	main(int argc, char **argv)
 	print_operations(moves->ops);
 	free_stack(&a);
 	free_stack(&moves->ops);
+	free_stack(&moves->chunks);
 	free(moves);
 }

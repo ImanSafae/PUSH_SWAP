@@ -16,9 +16,9 @@ void	update_chunks_list(t_list **chunks, int count)
 {
 	t_list	*tmp;
 
-	tmp = (*chunks);
 	if (count == 0)
 	{
+		tmp = (*chunks);
 		(*chunks) = (*chunks)->next;
 		free(tmp);
 	}

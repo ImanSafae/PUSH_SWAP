@@ -46,7 +46,6 @@ typedef struct s_moves
 // PARSING
 int		ft_isspace(char c);
 int		ft_isdigit(int c);
-// char	*ft_strndup(char *str, int n);
 int		issymbol(char c);
 t_list	*parse_list(int argc, char **argv);
 void	send_error(void);
@@ -56,6 +55,7 @@ int		is_sorted(t_list *stack);
 void	free_tab(char ***tab);
 void	erase_content(void *content);
 void	free_stack(t_list **stack);
+void	free_first_element(t_list **list);
 
 // OPERATIONS
 void	sa(t_list **stack_a, t_list **ops);
